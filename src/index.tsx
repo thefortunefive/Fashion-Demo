@@ -6,17 +6,17 @@ const app = new Hono()
 // Serve static files
 app.use('/static/*', serveStatic())
 
-// Image URLs from uploaded files
+// Local paths for images and videos (served from /static/media/)
 const images = {
-  creamSuit1: 'https://www.genspark.ai/api/files/s/0AWH68Uq',
-  navySuit1: 'https://www.genspark.ai/api/files/s/4TcFCqSk',
-  creamSuit2: 'https://www.genspark.ai/api/files/s/WNIKjaCW',
-  navySuit2: 'https://www.genspark.ai/api/files/s/M2xanLfr'
+  creamSuit1: '/static/media/cream-suit-1.jpg',
+  navySuit1: '/static/media/navy-suit-1.jpg',
+  creamSuit2: '/static/media/cream-suit-2.jpg',
+  navySuit2: '/static/media/navy-suit-2.jpg'
 }
 
 const videos = {
-  creamWalk: 'https://www.genspark.ai/api/files/s/mFpyDm3f',
-  navyWalk: 'https://www.genspark.ai/api/files/s/NbB298EW'
+  creamWalk: '/static/media/cream-walk.mp4',
+  navyWalk: '/static/media/navy-walk.mp4'
 }
 
 // Main page - Suitsupply style
