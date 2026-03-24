@@ -54,7 +54,7 @@ app.get('/', (c) => {
             line-height: 1.6;
         }
 
-        /* Navigation */
+        /* ── Navigation ── */
         .nav {
             position: fixed;
             top: 0;
@@ -114,41 +114,36 @@ app.get('/', (c) => {
             font-weight: 600;
         }
 
-        /* Hero Section */
+        /* ── Hero ── */
         .hero {
             margin-top: 72px;
-            padding: 80px 60px;
+            padding: 100px 60px;
             background: linear-gradient(135deg, var(--ss-cream) 0%, var(--ss-white) 100%);
             text-align: center;
         }
 
-        .hero-tag {
-            font-size: 11px;
-            font-weight: 600;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--ss-accent);
-            margin-bottom: 16px;
-        }
-
         .hero-title {
             font-family: 'Playfair Display', serif;
-            font-size: 48px;
+            font-size: 52px;
             font-weight: 500;
             line-height: 1.2;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
             color: var(--ss-black);
+            max-width: 820px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .hero-subtitle {
-            font-size: 16px;
+            font-size: 17px;
             color: var(--ss-gray);
-            max-width: 600px;
+            max-width: 640px;
             margin: 0 auto;
             font-weight: 300;
+            line-height: 1.7;
         }
 
-        /* Section Styles */
+        /* ── Shared Section Styles ── */
         .section {
             padding: 80px 60px;
         }
@@ -194,7 +189,7 @@ app.get('/', (c) => {
             color: rgba(255,255,255,0.6);
         }
 
-        /* Product Row - Enhanced → Video (2-col) */
+        /* ── Showcase: Product Rows ── */
         .product-row {
             max-width: 1400px;
             margin: 0 auto 80px;
@@ -212,54 +207,58 @@ app.get('/', (c) => {
             color: var(--ss-black);
         }
 
-        .comparison-grid {
+        /* 3-column × 2-row grid */
+        .showcase-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
         }
 
-        .comparison-item {
+        .showcase-item {
             background: var(--ss-white);
             border-radius: 4px;
             overflow: hidden;
             box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .comparison-media {
+        .showcase-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 18px 50px rgba(0,0,0,0.12);
+        }
+
+        .showcase-media {
             position: relative;
             aspect-ratio: 3/4;
             overflow: hidden;
             background: var(--ss-light-gray);
         }
 
-        .comparison-media img {
+        .showcase-media img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        .comparison-media video {
+        .showcase-media video {
             width: 100%;
             height: 100%;
             object-fit: cover;
             cursor: pointer;
         }
 
+        /* Badge labels */
         .comparison-label {
             position: absolute;
-            top: 16px;
-            left: 16px;
-            padding: 8px 16px;
+            top: 14px;
+            left: 14px;
+            padding: 7px 14px;
             font-size: 10px;
             font-weight: 600;
             letter-spacing: 2px;
             text-transform: uppercase;
             border-radius: 2px;
-        }
-
-        .label-original {
-            background: var(--ss-dark);
-            color: var(--ss-white);
+            z-index: 2;
         }
 
         .label-enhanced {
@@ -272,6 +271,7 @@ app.get('/', (c) => {
             color: var(--ss-white);
         }
 
+        /* Play button */
         .play-button {
             position: absolute;
             top: 50%;
@@ -304,32 +304,29 @@ app.get('/', (c) => {
             content: "\\f04c";
         }
 
-        .comparison-info {
-            padding: 20px;
+        /* Caption below each item */
+        .showcase-info {
+            padding: 18px 20px;
             text-align: center;
         }
 
-        .comparison-type {
+        .showcase-type {
             font-size: 11px;
             font-weight: 600;
             letter-spacing: 2px;
             text-transform: uppercase;
             color: var(--ss-gray);
-            margin-bottom: 6px;
+            margin-bottom: 5px;
         }
 
-        .comparison-title {
+        .showcase-title {
             font-family: 'Playfair Display', serif;
-            font-size: 18px;
+            font-size: 16px;
+            color: var(--ss-black);
         }
 
-        /* Arrow between items */
-        .arrow-connector {
-            display: none;
-        }
-
-        /* Features Section */
-        .features-grid {
+        /* ── How It Works ── */
+        .steps-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 40px;
@@ -337,39 +334,81 @@ app.get('/', (c) => {
             margin: 0 auto;
         }
 
-        .feature-card {
+        .step-card {
             text-align: center;
             padding: 40px 30px;
-            background: rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.7);
             border-radius: 4px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
         }
 
-        .feature-icon {
-            width: 64px;
-            height: 64px;
-            margin: 0 auto 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--ss-accent);
-            border-radius: 50%;
-            font-size: 24px;
-            color: var(--ss-white);
+        .step-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 56px;
+            font-weight: 700;
+            color: var(--ss-accent);
+            line-height: 1;
+            margin-bottom: 16px;
         }
 
-        .feature-title {
+        .step-title {
             font-family: 'Playfair Display', serif;
             font-size: 20px;
-            margin-bottom: 10px;
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: var(--ss-black);
         }
 
-        .feature-desc {
+        .step-desc {
             font-size: 14px;
-            color: rgba(255,255,255,0.6);
-            line-height: 1.7;
+            color: var(--ss-gray);
+            line-height: 1.75;
+            font-weight: 300;
         }
 
-        /* CTA Section */
+        /* ── Business Case ── */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 4px;
+            border-top: 2px solid var(--ss-accent);
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 64px;
+            font-weight: 700;
+            color: var(--ss-accent);
+            line-height: 1;
+            margin-bottom: 14px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--ss-white);
+            margin-bottom: 8px;
+        }
+
+        .stat-desc {
+            font-size: 13px;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        /* ── CTA ── */
         .cta-section {
             text-align: center;
             background: linear-gradient(135deg, var(--ss-navy) 0%, var(--ss-black) 100%);
@@ -386,7 +425,7 @@ app.get('/', (c) => {
         .cta-text {
             font-size: 16px;
             color: rgba(255,255,255,0.7);
-            margin-bottom: 30px;
+            margin-bottom: 36px;
             max-width: 500px;
             margin-left: auto;
             margin-right: auto;
@@ -414,7 +453,7 @@ app.get('/', (c) => {
             transform: translateY(-2px);
         }
 
-        /* Footer */
+        /* ── Footer ── */
         .footer {
             background: var(--ss-black);
             color: var(--ss-white);
@@ -438,66 +477,7 @@ app.get('/', (c) => {
             margin: 0 auto;
         }
 
-        /* AI Gallery Grid */
-        .gallery-section {
-            padding: 80px 60px;
-            background: var(--ss-cream);
-        }
-
-        .gallery-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .gallery-item {
-            position: relative;
-            aspect-ratio: 3/4;
-            overflow: hidden;
-            border-radius: 4px;
-            cursor: pointer;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-        }
-
-        .gallery-item:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 16px 50px rgba(0,0,0,0.15);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.05);
-        }
-
-        .gallery-item-badge {
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            padding: 6px 12px;
-            background: var(--ss-accent);
-            color: var(--ss-white);
-            border-radius: 2px;
-            font-size: 9px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        /* Lightbox */
+        /* ── Lightbox ── */
         .lightbox {
             display: none;
             position: fixed;
@@ -539,17 +519,17 @@ app.get('/', (c) => {
             background: rgba(255,255,255,0.2);
         }
 
-        /* Responsive */
+        /* ── Responsive ── */
         @media (max-width: 1024px) {
-            .comparison-grid {
+            .showcase-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .steps-grid {
                 grid-template-columns: 1fr;
-                max-width: 500px;
+                max-width: 480px;
                 margin: 0 auto;
             }
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-            .gallery-grid {
+            .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
@@ -559,26 +539,37 @@ app.get('/', (c) => {
                 display: none;
             }
             .hero-title {
-                font-size: 32px;
+                font-size: 34px;
             }
             .section {
-                padding: 60px 30px;
+                padding: 60px 24px;
             }
             .section-title {
                 font-size: 28px;
             }
-            .gallery-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
+            .showcase-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin: 0 auto;
             }
-            .gallery-section {
-                padding: 60px 30px;
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 24px;
+            }
+            .stat-number {
+                font-size: 48px;
+            }
+            .hero {
+                padding: 70px 24px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
+
+    <!-- ═══════════════════════════════════════════
+         SECTION 1 — NAVIGATION + HERO
+    ═══════════════════════════════════════════ -->
     <nav class="nav">
         <div class="nav-inner">
             <a href="/" class="logo">5th Ave Fashion</a>
@@ -590,181 +581,291 @@ app.get('/', (c) => {
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-tag">5th Ave Fashion Content Studio</div>
-        <h1 class="hero-title">AI-Powered Content for Fashion Brands</h1>
-        <p class="hero-subtitle">See how AI transforms static product photography into enhanced visuals, dynamic 360° videos, and scroll-stopping social content.</p>
+        <h1 class="hero-title">AI-Powered Product Photography &amp; Video for Fashion Brands</h1>
+        <p class="hero-subtitle">Studio-quality model images and walkthrough videos — no photoshoot required. Product pages with video convert up to 65% higher.</p>
     </section>
 
-    <!-- Product Showcase Section -->
-    <section id="showcase" class="section">
-        <div class="section-header">
-            <div class="section-tag">AI Transformation</div>
-            <h2 class="section-title">AI Enhanced → AI Video</h2>
-            <p class="section-subtitle">Watch how we take original product photography and transform it into enhanced imagery and moving content.</p>
-        </div>
 
-        <!-- Navy Birdseye Suit Row -->
+    <!-- ═══════════════════════════════════════════
+         SECTION 2 — SHOWCASE
+    ═══════════════════════════════════════════ -->
+    <section id="showcase" class="section">
+
+        <!-- ── Row 1: Charcoal Slim-Fit Suit (Male) ── -->
         <div class="product-row">
             <h3 class="product-row-title">Charcoal Slim-Fit Suit</h3>
-            <div class="comparison-grid">
-                <!-- AI Enhanced -->
-                <div class="comparison-item">
-                    <div class="comparison-media">
-                        <img src="${media.navyEnhanced}" alt="Navy Suit AI Enhanced">
-                        <span class="comparison-label label-enhanced">AI Enhanced</span>
+            <div class="showcase-grid">
+
+                <!-- TOP ROW — 3 Images -->
+
+                <!-- Image 1: Product Page -->
+                <div class="showcase-item">
+                    <div class="showcase-media">
+                        <img src="/static/media/navy-gallery/navy-ai-1.jpg" alt="Product Page Image">
+                        <span class="comparison-label label-enhanced">Product Page</span>
                     </div>
-                    <div class="comparison-info">
-                        <div class="comparison-type">Enhanced Image</div>
-                        <div class="comparison-title">Color & Detail Optimization</div>
+                    <div class="showcase-info">
+                        <div class="showcase-type">Product Page Image</div>
+                        <div class="showcase-title">E-Commerce Ready</div>
                     </div>
                 </div>
 
-                <!-- AI Video -->
-                <div class="comparison-item">
-                    <div class="comparison-media">
-                        <video id="navy-video" loop muted playsinline preload="metadata">
+                <!-- Image 2: Campaign -->
+                <div class="showcase-item">
+                    <div class="showcase-media">
+                        <img src="/static/media/navy-gallery/navy-ai-2.jpg" alt="Campaign Shot">
+                        <span class="comparison-label label-enhanced">Campaign</span>
+                    </div>
+                    <div class="showcase-info">
+                        <div class="showcase-type">Campaign Shot</div>
+                        <div class="showcase-title">Editorial &amp; Lookbook</div>
+                    </div>
+                </div>
+
+                <!-- Image 3: Detail -->
+                <div class="showcase-item">
+                    <div class="showcase-media">
+                        <img src="/static/media/navy-gallery/navy-ai-3.jpg" alt="Detail Close-Up">
+                        <span class="comparison-label label-enhanced">Detail</span>
+                    </div>
+                    <div class="showcase-info">
+                        <div class="showcase-type">Detail Close-Up</div>
+                        <div class="showcase-title">Texture &amp; Craftsmanship</div>
+                    </div>
+                </div>
+
+                <!-- BOTTOM ROW — 3 Videos -->
+
+                <!-- Video 1: Product Video -->
+                <div class="showcase-item">
+                    <div class="showcase-media">
+                        <video id="navy-video-1" loop muted playsinline preload="metadata">
                             <source src="${media.navyVideo}" type="video/mp4">
                         </video>
-                        <span class="comparison-label label-video">AI Video</span>
-                        <div class="play-button" onclick="toggleVideo('navy-video', this)">
+                        <span class="comparison-label label-video">Product Video</span>
+                        <div class="play-button" onclick="toggleVideo('navy-video-1', this)">
                             <i class="fas fa-play"></i>
                         </div>
                     </div>
-                    <div class="comparison-info">
-                        <div class="comparison-type">360° Video</div>
-                        <div class="comparison-title">AI-Generated Motion</div>
+                    <div class="showcase-info">
+                        <div class="showcase-type">Product Page Video</div>
+                        <div class="showcase-title">Model Walkthrough</div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Navy AI Campaign Gallery -->
-            <div class="gallery-inline" style="margin-top: 40px;">
-                <h4 style="font-family: 'Playfair Display', serif; font-size: 20px; text-align: center; margin-bottom: 24px; color: var(--ss-gray);">AI Campaign Collection</h4>
-                <div class="gallery-grid">
-                    <div class="gallery-item" onclick="openLightbox('/static/media/navy-gallery/navy-ai-1.jpg')">
-                        <img src="/static/media/navy-gallery/navy-ai-1.jpg" alt="AI Generated Image">
-                        <span class="gallery-item-badge">AI Generated Image</span>
+                <!-- Video 2: Social -->
+                <div class="showcase-item">
+                    <div class="showcase-media">
+                        <video id="navy-video-2" loop muted playsinline preload="metadata">
+                            <source src="${media.navyVideo}" type="video/mp4">
+                        </video>
+                        <span class="comparison-label label-video">Social</span>
+                        <div class="play-button" onclick="toggleVideo('navy-video-2', this)">
+                            <i class="fas fa-play"></i>
+                        </div>
                     </div>
-                    <div class="gallery-item" onclick="openLightbox('/static/media/navy-gallery/navy-ai-2.jpg')">
-                        <img src="/static/media/navy-gallery/navy-ai-2.jpg" alt="AI Generated Image">
-                        <span class="gallery-item-badge">AI Generated Image</span>
-                    </div>
-                    <div class="gallery-item" onclick="openLightbox('/static/media/navy-gallery/navy-ai-3.jpg')">
-                        <img src="/static/media/navy-gallery/navy-ai-3.jpg" alt="AI Generated Image">
-                        <span class="gallery-item-badge">AI Generated Image</span>
-                    </div>
-                    <div class="gallery-item" onclick="openLightbox('/static/media/navy-gallery/navy-ai-4.jpg')">
-                        <img src="/static/media/navy-gallery/navy-ai-4.jpg" alt="AI Generated Image">
-                        <span class="gallery-item-badge">AI Generated Image</span>
+                    <div class="showcase-info">
+                        <div class="showcase-type">Social Content Clip</div>
+                        <div class="showcase-title">Instagram &amp; TikTok Ready</div>
                     </div>
                 </div>
+
+                <!-- Video 3: Lookbook -->
+                <div class="showcase-item">
+                    <div class="showcase-media">
+                        <video id="navy-video-3" loop muted playsinline preload="metadata">
+                            <source src="${media.navyVideo}" type="video/mp4">
+                        </video>
+                        <span class="comparison-label label-video">Lookbook</span>
+                        <div class="play-button" onclick="toggleVideo('navy-video-3', this)">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="showcase-info">
+                        <div class="showcase-type">Lookbook Video</div>
+                        <div class="showcase-title">Campaign &amp; Lifestyle</div>
+                    </div>
+                </div>
+
             </div>
         </div>
 
-        <!-- Ivory/Cream Suit Row -->
+        <!-- ── Row 2: Emerald Cocktail Dress (Female) ── -->
         <div class="product-row">
-            <h3 class="product-row-title">Cream Linen Two-Piece Suit</h3>
-            <div class="comparison-grid">
-                <!-- AI Enhanced -->
-                <div class="comparison-item">
-                    <div class="comparison-media">
-                        <img src="${media.creamEnhanced}" alt="Ivory Suit AI Enhanced">
-                        <span class="comparison-label label-enhanced">AI Enhanced</span>
+            <h3 class="product-row-title">Emerald Cocktail Dress</h3>
+            <div class="showcase-grid">
+
+                <!-- TOP ROW — 3 Images -->
+
+                <!-- Image 1: Product Page -->
+                <div class="showcase-item">
+                    <div class="showcase-media">
+                        <img src="/static/media/ivory-gallery/ivory-ai-1.jpg" alt="Product Page Image">
+                        <span class="comparison-label label-enhanced">Product Page</span>
                     </div>
-                    <div class="comparison-info">
-                        <div class="comparison-type">Enhanced Image</div>
-                        <div class="comparison-title">Lighting & Background</div>
+                    <div class="showcase-info">
+                        <div class="showcase-type">Product Page Image</div>
+                        <div class="showcase-title">E-Commerce Ready</div>
                     </div>
                 </div>
 
-                <!-- AI Video -->
-                <div class="comparison-item">
-                    <div class="comparison-media">
-                        <video id="cream-video" loop muted playsinline preload="metadata">
+                <!-- Image 2: Campaign -->
+                <div class="showcase-item">
+                    <div class="showcase-media">
+                        <img src="/static/media/ivory-gallery/ivory-ai-2.jpg" alt="Campaign Shot">
+                        <span class="comparison-label label-enhanced">Campaign</span>
+                    </div>
+                    <div class="showcase-info">
+                        <div class="showcase-type">Campaign Shot</div>
+                        <div class="showcase-title">Editorial &amp; Lookbook</div>
+                    </div>
+                </div>
+
+                <!-- Image 3: Detail -->
+                <div class="showcase-item">
+                    <div class="showcase-media">
+                        <img src="/static/media/ivory-gallery/ivory-ai-3.jpg" alt="Detail Close-Up">
+                        <span class="comparison-label label-enhanced">Detail</span>
+                    </div>
+                    <div class="showcase-info">
+                        <div class="showcase-type">Detail Close-Up</div>
+                        <div class="showcase-title">Texture &amp; Craftsmanship</div>
+                    </div>
+                </div>
+
+                <!-- BOTTOM ROW — 3 Videos -->
+
+                <!-- Video 1: Product Video -->
+                <div class="showcase-item">
+                    <div class="showcase-media">
+                        <video id="cream-video-1" loop muted playsinline preload="metadata">
                             <source src="${media.creamVideo}" type="video/mp4">
                         </video>
-                        <span class="comparison-label label-video">AI Video</span>
-                        <div class="play-button" onclick="toggleVideo('cream-video', this)">
+                        <span class="comparison-label label-video">Product Video</span>
+                        <div class="play-button" onclick="toggleVideo('cream-video-1', this)">
                             <i class="fas fa-play"></i>
                         </div>
                     </div>
-                    <div class="comparison-info">
-                        <div class="comparison-type">360° Video</div>
-                        <div class="comparison-title">AI-Generated Motion</div>
+                    <div class="showcase-info">
+                        <div class="showcase-type">Product Page Video</div>
+                        <div class="showcase-title">Model Walkthrough</div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Ivory AI Campaign Gallery -->
-            <div class="gallery-inline" style="margin-top: 40px;">
-                <h4 style="font-family: 'Playfair Display', serif; font-size: 20px; text-align: center; margin-bottom: 24px; color: var(--ss-gray);">AI Campaign Collection</h4>
-                <div class="gallery-grid">
-                    <div class="gallery-item" onclick="openLightbox('/static/media/ivory-gallery/ivory-ai-1.jpg')">
-                        <img src="/static/media/ivory-gallery/ivory-ai-1.jpg" alt="AI Generated Image">
-                        <span class="gallery-item-badge">AI Generated Image</span>
+                <!-- Video 2: Social -->
+                <div class="showcase-item">
+                    <div class="showcase-media">
+                        <video id="cream-video-2" loop muted playsinline preload="metadata">
+                            <source src="${media.creamVideo}" type="video/mp4">
+                        </video>
+                        <span class="comparison-label label-video">Social</span>
+                        <div class="play-button" onclick="toggleVideo('cream-video-2', this)">
+                            <i class="fas fa-play"></i>
+                        </div>
                     </div>
-                    <div class="gallery-item" onclick="openLightbox('/static/media/ivory-gallery/ivory-ai-2.jpg')">
-                        <img src="/static/media/ivory-gallery/ivory-ai-2.jpg" alt="AI Generated Image">
-                        <span class="gallery-item-badge">AI Generated Image</span>
-                    </div>
-                    <div class="gallery-item" onclick="openLightbox('/static/media/ivory-gallery/ivory-ai-3.jpg')">
-                        <img src="/static/media/ivory-gallery/ivory-ai-3.jpg" alt="AI Generated Image">
-                        <span class="gallery-item-badge">AI Generated Image</span>
-                    </div>
-                    <div class="gallery-item" onclick="openLightbox('/static/media/ivory-gallery/ivory-ai-4.jpg')">
-                        <img src="/static/media/ivory-gallery/ivory-ai-4.jpg" alt="AI Generated Image">
-                        <span class="gallery-item-badge">AI Generated Image</span>
+                    <div class="showcase-info">
+                        <div class="showcase-type">Social Content Clip</div>
+                        <div class="showcase-title">Instagram &amp; TikTok Ready</div>
                     </div>
                 </div>
+
+                <!-- Video 3: Lookbook -->
+                <div class="showcase-item">
+                    <div class="showcase-media">
+                        <video id="cream-video-3" loop muted playsinline preload="metadata">
+                            <source src="${media.creamVideo}" type="video/mp4">
+                        </video>
+                        <span class="comparison-label label-video">Lookbook</span>
+                        <div class="play-button" onclick="toggleVideo('cream-video-3', this)">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="showcase-info">
+                        <div class="showcase-type">Lookbook Video</div>
+                        <div class="showcase-title">Campaign &amp; Lifestyle</div>
+                    </div>
+                </div>
+
             </div>
         </div>
+
     </section>
 
 
-
-    <!-- Lightbox -->
-    <div class="lightbox" id="lightbox">
-        <button class="lightbox-close" onclick="closeLightbox()">
-            <i class="fas fa-times"></i>
-        </button>
-        <img id="lightbox-img" src="" alt="Enlarged view">
-    </div>
-
-    <!-- Features Section -->
-    <section id="features" class="section section-dark">
+    <!-- ═══════════════════════════════════════════
+         SECTION 3 — HOW IT WORKS
+    ═══════════════════════════════════════════ -->
+    <section id="features" class="section section-cream">
         <div class="section-header">
-            <div class="section-tag">AI Capabilities</div>
-            <h2 class="section-title">What AI Can Create</h2>
-            <p class="section-subtitle">Transform your content strategy with powerful AI tools.</p>
+            <div class="section-tag">How It Works</div>
+            <h2 class="section-title">From Product Photo to Published Content in 3 Steps</h2>
         </div>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-image"></i>
-                </div>
-                <h3 class="feature-title">Image Enhancement</h3>
-                <p class="feature-desc">Automatic background optimization, color correction, and detail enhancement while maintaining brand consistency.</p>
+        <div class="steps-grid">
+
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3 class="step-title">Send Your Product</h3>
+                <p class="step-desc">Share your garment photos — flat-lay, hanger, or mannequin shots. No professional photography required.</p>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-video"></i>
-                </div>
-                <h3 class="feature-title">Video Generation</h3>
-                <p class="feature-desc">Create 360° product rotations and lifestyle videos from static images with smooth, professional motion.</p>
+
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3 class="step-title">We Generate the Content</h3>
+                <p class="step-desc">AI creates studio-quality model photography and walkthrough videos tailored to your brand and product.</p>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-share-alt"></i>
-                </div>
-                <h3 class="feature-title">Social Content</h3>
-                <p class="feature-desc">Generate platform-optimized content for Instagram, TikTok, and YouTube automatically.</p>
+
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3 class="step-title">Publish Everywhere</h3>
+                <p class="step-desc">Receive ready-to-use assets for your website product pages, social media, email campaigns, and lookbooks.</p>
             </div>
+
         </div>
     </section>
 
-    <!-- CTA Section -->
+
+    <!-- ═══════════════════════════════════════════
+         SECTION 4 — THE BUSINESS CASE
+    ═══════════════════════════════════════════ -->
+    <section class="section section-dark">
+        <div class="section-header">
+            <div class="section-tag">Why AI Content</div>
+            <h2 class="section-title">The Numbers Behind AI Fashion Content</h2>
+        </div>
+        <div class="stats-grid">
+
+            <div class="stat-card">
+                <div class="stat-number">65%</div>
+                <div class="stat-label">Higher Conversion</div>
+                <div class="stat-desc">Product pages with video vs. images alone</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-number">90%</div>
+                <div class="stat-label">Cost Savings</div>
+                <div class="stat-desc">Compared to traditional photoshoot production</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-number">10x</div>
+                <div class="stat-label">Faster Output</div>
+                <div class="stat-desc">Days instead of weeks for full campaign assets</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-number">40%</div>
+                <div class="stat-label">More Engagement</div>
+                <div class="stat-desc">Luxury brands using video content (McKinsey)</div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════
+         SECTION 5 — CTA + FOOTER
+    ═══════════════════════════════════════════ -->
     <section id="contact" class="cta-section">
         <div class="section-tag">Get Started</div>
         <h2 class="cta-title">Ready to Upgrade Your Fashion Content?</h2>
@@ -775,11 +876,22 @@ app.get('/', (c) => {
         </a>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="footer-brand">5th Ave Fashion</div>
         <p class="footer-text">This is a demonstration page showcasing AI-powered content creation capabilities. All imagery and video content is used for demonstration purposes.</p>
     </footer>
+
+
+    <!-- ═══════════════════════════════════════════
+         LIGHTBOX
+    ═══════════════════════════════════════════ -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" onclick="closeLightbox()">
+            <i class="fas fa-times"></i>
+        </button>
+        <img id="lightbox-img" src="" alt="Enlarged view">
+    </div>
+
 
     <script>
         function toggleVideo(videoId, button) {
@@ -823,18 +935,12 @@ app.get('/', (c) => {
             document.body.style.overflow = '';
         }
 
-        // Close lightbox on background click
         document.getElementById('lightbox').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeLightbox();
-            }
+            if (e.target === this) closeLightbox();
         });
 
-        // Close lightbox on escape key
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeLightbox();
-            }
+            if (e.key === 'Escape') closeLightbox();
         });
     </script>
 </body>
@@ -848,13 +954,11 @@ app.get('/api/content', (c) => {
     products: [
       {
         name: 'Charcoal Slim-Fit Suit',
-        original: media.navyOriginal,
         enhanced: media.navyEnhanced,
         video: media.navyVideo
       },
       {
-        name: 'Cream Linen Two-Piece Suit',
-        original: media.creamOriginal,
+        name: 'Emerald Cocktail Dress',
         enhanced: media.creamEnhanced,
         video: media.creamVideo
       }
