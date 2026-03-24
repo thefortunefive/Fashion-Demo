@@ -194,7 +194,7 @@ app.get('/', (c) => {
             color: rgba(255,255,255,0.6);
         }
 
-        /* Product Row - Original → Enhanced → Video */
+        /* Product Row - Enhanced → Video (2-col) */
         .product-row {
             max-width: 1400px;
             margin: 0 auto 80px;
@@ -214,7 +214,7 @@ app.get('/', (c) => {
 
         .comparison-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 30px;
         }
 
@@ -451,8 +451,10 @@ app.get('/', (c) => {
 
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
         .gallery-item {
@@ -541,7 +543,7 @@ app.get('/', (c) => {
         @media (max-width: 1024px) {
             .comparison-grid {
                 grid-template-columns: 1fr;
-                max-width: 400px;
+                max-width: 500px;
                 margin: 0 auto;
             }
             .features-grid {
@@ -599,7 +601,7 @@ app.get('/', (c) => {
     <section id="showcase" class="section">
         <div class="section-header">
             <div class="section-tag">AI Transformation</div>
-            <h2 class="section-title">Original → AI Enhanced → AI Video</h2>
+            <h2 class="section-title">AI Enhanced → AI Video</h2>
             <p class="section-subtitle">Watch how we take original product photography and transform it into enhanced imagery and moving content.</p>
         </div>
 
@@ -607,18 +609,6 @@ app.get('/', (c) => {
         <div class="product-row">
             <h3 class="product-row-title">Charcoal Slim-Fit Suit</h3>
             <div class="comparison-grid">
-                <!-- Original -->
-                <div class="comparison-item">
-                    <div class="comparison-media">
-                        <img src="${media.navyOriginal}" alt="Navy Suit Original">
-                        <span class="comparison-label label-original">Original</span>
-                    </div>
-                    <div class="comparison-info">
-                        <div class="comparison-type">Source Image</div>
-                        <div class="comparison-title">Product Photography</div>
-                    </div>
-                </div>
-
                 <!-- AI Enhanced -->
                 <div class="comparison-item">
                     <div class="comparison-media">
@@ -649,9 +639,9 @@ app.get('/', (c) => {
                 </div>
             </div>
 
-            <!-- Navy AI Generated Gallery -->
+            <!-- Navy AI Campaign Gallery -->
             <div class="gallery-inline" style="margin-top: 40px;">
-                <h4 style="font-family: 'Playfair Display', serif; font-size: 20px; text-align: center; margin-bottom: 24px; color: var(--ss-gray);">AI Generated Collection</h4>
+                <h4 style="font-family: 'Playfair Display', serif; font-size: 20px; text-align: center; margin-bottom: 24px; color: var(--ss-gray);">AI Campaign Collection</h4>
                 <div class="gallery-grid">
                     <div class="gallery-item" onclick="openLightbox('/static/media/navy-gallery/navy-ai-1.jpg')">
                         <img src="/static/media/navy-gallery/navy-ai-1.jpg" alt="AI Generated Image">
@@ -669,26 +659,6 @@ app.get('/', (c) => {
                         <img src="/static/media/navy-gallery/navy-ai-4.jpg" alt="AI Generated Image">
                         <span class="gallery-item-badge">AI Generated Image</span>
                     </div>
-                    <div class="gallery-item" onclick="openLightbox('/static/media/navy-gallery/navy-ai-5.jpg')">
-                        <img src="/static/media/navy-gallery/navy-ai-5.jpg" alt="AI Generated Image">
-                        <span class="gallery-item-badge">AI Generated Image</span>
-                    </div>
-                    <div class="gallery-item" onclick="openLightbox('/static/media/navy-gallery/navy-ai-6.jpg')">
-                        <img src="/static/media/navy-gallery/navy-ai-6.jpg" alt="AI Generated Image">
-                        <span class="gallery-item-badge">AI Generated Image</span>
-                    </div>
-                    <div class="gallery-item" onclick="openLightbox('/static/media/navy-gallery/navy-ai-7.jpg')">
-                        <img src="/static/media/navy-gallery/navy-ai-7.jpg" alt="AI Generated Image">
-                        <span class="gallery-item-badge">AI Generated Image</span>
-                    </div>
-                    <div class="gallery-item" onclick="openLightbox('/static/media/navy-gallery/navy-ai-8.jpg')">
-                        <img src="/static/media/navy-gallery/navy-ai-8.jpg" alt="AI Generated Image">
-                        <span class="gallery-item-badge">AI Generated Image</span>
-                    </div>
-                    <div class="gallery-item" onclick="openLightbox('/static/media/navy-gallery/navy-ai-9.jpg')">
-                        <img src="/static/media/navy-gallery/navy-ai-9.jpg" alt="AI Generated Image">
-                        <span class="gallery-item-badge">AI Generated Image</span>
-                    </div>
                 </div>
             </div>
         </div>
@@ -697,18 +667,6 @@ app.get('/', (c) => {
         <div class="product-row">
             <h3 class="product-row-title">Cream Linen Two-Piece Suit</h3>
             <div class="comparison-grid">
-                <!-- Original -->
-                <div class="comparison-item">
-                    <div class="comparison-media">
-                        <img src="${media.creamOriginal}" alt="Ivory Suit Original">
-                        <span class="comparison-label label-original">Original</span>
-                    </div>
-                    <div class="comparison-info">
-                        <div class="comparison-type">Source Image</div>
-                        <div class="comparison-title">Product Photography</div>
-                    </div>
-                </div>
-
                 <!-- AI Enhanced -->
                 <div class="comparison-item">
                     <div class="comparison-media">
@@ -739,9 +697,9 @@ app.get('/', (c) => {
                 </div>
             </div>
 
-            <!-- Ivory AI Generated Gallery -->
+            <!-- Ivory AI Campaign Gallery -->
             <div class="gallery-inline" style="margin-top: 40px;">
-                <h4 style="font-family: 'Playfair Display', serif; font-size: 20px; text-align: center; margin-bottom: 24px; color: var(--ss-gray);">AI Generated Collection</h4>
+                <h4 style="font-family: 'Playfair Display', serif; font-size: 20px; text-align: center; margin-bottom: 24px; color: var(--ss-gray);">AI Campaign Collection</h4>
                 <div class="gallery-grid">
                     <div class="gallery-item" onclick="openLightbox('/static/media/ivory-gallery/ivory-ai-1.jpg')">
                         <img src="/static/media/ivory-gallery/ivory-ai-1.jpg" alt="AI Generated Image">
@@ -757,26 +715,6 @@ app.get('/', (c) => {
                     </div>
                     <div class="gallery-item" onclick="openLightbox('/static/media/ivory-gallery/ivory-ai-4.jpg')">
                         <img src="/static/media/ivory-gallery/ivory-ai-4.jpg" alt="AI Generated Image">
-                        <span class="gallery-item-badge">AI Generated Image</span>
-                    </div>
-                    <div class="gallery-item" onclick="openLightbox('/static/media/ivory-gallery/ivory-ai-5.jpg')">
-                        <img src="/static/media/ivory-gallery/ivory-ai-5.jpg" alt="AI Generated Image">
-                        <span class="gallery-item-badge">AI Generated Image</span>
-                    </div>
-                    <div class="gallery-item" onclick="openLightbox('/static/media/ivory-gallery/ivory-ai-6.jpg')">
-                        <img src="/static/media/ivory-gallery/ivory-ai-6.jpg" alt="AI Generated Image">
-                        <span class="gallery-item-badge">AI Generated Image</span>
-                    </div>
-                    <div class="gallery-item" onclick="openLightbox('/static/media/ivory-gallery/ivory-ai-7.jpg')">
-                        <img src="/static/media/ivory-gallery/ivory-ai-7.jpg" alt="AI Generated Image">
-                        <span class="gallery-item-badge">AI Generated Image</span>
-                    </div>
-                    <div class="gallery-item" onclick="openLightbox('/static/media/ivory-gallery/ivory-ai-8.jpg')">
-                        <img src="/static/media/ivory-gallery/ivory-ai-8.jpg" alt="AI Generated Image">
-                        <span class="gallery-item-badge">AI Generated Image</span>
-                    </div>
-                    <div class="gallery-item" onclick="openLightbox('/static/media/ivory-gallery/ivory-ai-9.jpg')">
-                        <img src="/static/media/ivory-gallery/ivory-ai-9.jpg" alt="AI Generated Image">
                         <span class="gallery-item-badge">AI Generated Image</span>
                     </div>
                 </div>
