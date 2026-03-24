@@ -611,19 +611,7 @@ app.get('/', (c) => {
                     </div>
                 </div>
 
-                <!-- Image 2: Campaign -->
-                <div class="showcase-item">
-                    <div class="showcase-media">
-                        <img src="https://res.cloudinary.com/dtdajp5sw/image/upload/male2_qhirhe.png" alt="Campaign Shot">
-                        <span class="comparison-label label-enhanced">Campaign</span>
-                    </div>
-                    <div class="showcase-info">
-                        <div class="showcase-type">Campaign Shot</div>
-                        <div class="showcase-title">Editorial &amp; Lookbook</div>
-                    </div>
-                </div>
-
-                <!-- Image 3: Detail -->
+                <!-- Image 2: Detail -->
                 <div class="showcase-item">
                     <div class="showcase-media">
                         <img src="https://res.cloudinary.com/dtdajp5sw/image/upload/male3_hi5cf1.png" alt="Detail Close-Up">
@@ -632,6 +620,18 @@ app.get('/', (c) => {
                     <div class="showcase-info">
                         <div class="showcase-type">Detail Close-Up</div>
                         <div class="showcase-title">Texture &amp; Craftsmanship</div>
+                    </div>
+                </div>
+
+                <!-- Image 3: Campaign -->
+                <div class="showcase-item">
+                    <div class="showcase-media">
+                        <img src="https://res.cloudinary.com/dtdajp5sw/image/upload/male2_qhirhe.png" alt="Campaign Shot">
+                        <span class="comparison-label label-enhanced">Campaign</span>
+                    </div>
+                    <div class="showcase-info">
+                        <div class="showcase-type">Campaign Shot</div>
+                        <div class="showcase-title">Editorial &amp; Lookbook</div>
                     </div>
                 </div>
 
@@ -654,37 +654,37 @@ app.get('/', (c) => {
                     </div>
                 </div>
 
-                <!-- Video 2: Social -->
+                <!-- Video 2: Lookbook -->
                 <div class="showcase-item">
                     <div class="showcase-media">
                         <video id="navy-video-2" loop muted playsinline preload="metadata">
-                            <source src="https://res.cloudinary.com/dtdajp5sw/video/upload/male1_Vid2_phlucx.mp4" type="video/mp4">
-                        </video>
-                        <span class="comparison-label label-video">Social</span>
-                        <div class="play-button" onclick="toggleVideo('navy-video-2', this)">
-                            <i class="fas fa-play"></i>
-                        </div>
-                    </div>
-                    <div class="showcase-info">
-                        <div class="showcase-type">Social Content Clip</div>
-                        <div class="showcase-title">Instagram &amp; TikTok Ready</div>
-                    </div>
-                </div>
-
-                <!-- Video 3: Lookbook -->
-                <div class="showcase-item">
-                    <div class="showcase-media">
-                        <video id="navy-video-3" loop muted playsinline preload="metadata">
                             <source src="https://res.cloudinary.com/dtdajp5sw/video/upload/male1_Vid3_ruade2.mp4" type="video/mp4">
                         </video>
                         <span class="comparison-label label-video">Lookbook</span>
-                        <div class="play-button" onclick="toggleVideo('navy-video-3', this)">
+                        <div class="play-button" onclick="toggleVideo('navy-video-2', this)">
                             <i class="fas fa-play"></i>
                         </div>
                     </div>
                     <div class="showcase-info">
                         <div class="showcase-type">Lookbook Video</div>
                         <div class="showcase-title">Campaign &amp; Lifestyle</div>
+                    </div>
+                </div>
+
+                <!-- Video 3: Social -->
+                <div class="showcase-item">
+                    <div class="showcase-media">
+                        <video id="navy-video-3" loop muted playsinline preload="metadata">
+                            <source src="https://res.cloudinary.com/dtdajp5sw/video/upload/male1_Vid2_phlucx.mp4" type="video/mp4">
+                        </video>
+                        <span class="comparison-label label-video">Social</span>
+                        <div class="play-button" onclick="toggleVideo('navy-video-3', this)">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="showcase-info">
+                        <div class="showcase-type">Social Content Clip</div>
+                        <div class="showcase-title">Instagram &amp; TikTok Ready</div>
                     </div>
                 </div>
 
@@ -710,19 +710,7 @@ app.get('/', (c) => {
                     </div>
                 </div>
 
-                <!-- Image 2: Campaign -->
-                <div class="showcase-item">
-                    <div class="showcase-media">
-                        <img src="https://res.cloudinary.com/dtdajp5sw/image/upload/Female2_hypfj9.png" alt="Campaign Shot">
-                        <span class="comparison-label label-enhanced">Campaign</span>
-                    </div>
-                    <div class="showcase-info">
-                        <div class="showcase-type">Campaign Shot</div>
-                        <div class="showcase-title">Editorial &amp; Lookbook</div>
-                    </div>
-                </div>
-
-                <!-- Image 3: Detail -->
+                <!-- Image 2: Detail -->
                 <div class="showcase-item">
                     <div class="showcase-media">
                         <img src="https://res.cloudinary.com/dtdajp5sw/image/upload/Female3_ajted8.png" alt="Detail Close-Up">
@@ -731,6 +719,18 @@ app.get('/', (c) => {
                     <div class="showcase-info">
                         <div class="showcase-type">Detail Close-Up</div>
                         <div class="showcase-title">Texture &amp; Craftsmanship</div>
+                    </div>
+                </div>
+
+                <!-- Image 3: Campaign -->
+                <div class="showcase-item">
+                    <div class="showcase-media">
+                        <img src="https://res.cloudinary.com/dtdajp5sw/image/upload/Female2_hypfj9.png" alt="Campaign Shot">
+                        <span class="comparison-label label-enhanced">Campaign</span>
+                    </div>
+                    <div class="showcase-info">
+                        <div class="showcase-type">Campaign Shot</div>
+                        <div class="showcase-title">Editorial &amp; Lookbook</div>
                     </div>
                 </div>
 
@@ -753,37 +753,37 @@ app.get('/', (c) => {
                     </div>
                 </div>
 
-                <!-- Video 2: Social -->
+                <!-- Video 2: Lookbook -->
                 <div class="showcase-item">
                     <div class="showcase-media">
                         <video id="cream-video-2" loop muted playsinline preload="metadata">
-                            <source src="https://res.cloudinary.com/dtdajp5sw/video/upload/Female1_Vid2_idjuuy.mp4" type="video/mp4">
-                        </video>
-                        <span class="comparison-label label-video">Social</span>
-                        <div class="play-button" onclick="toggleVideo('cream-video-2', this)">
-                            <i class="fas fa-play"></i>
-                        </div>
-                    </div>
-                    <div class="showcase-info">
-                        <div class="showcase-type">Social Content Clip</div>
-                        <div class="showcase-title">Instagram &amp; TikTok Ready</div>
-                    </div>
-                </div>
-
-                <!-- Video 3: Lookbook -->
-                <div class="showcase-item">
-                    <div class="showcase-media">
-                        <video id="cream-video-3" loop muted playsinline preload="metadata">
                             <source src="https://res.cloudinary.com/dtdajp5sw/video/upload/kling_20260324_Image_to_Video_Video_1__P_3221_0_qhwnvc.mp4" type="video/mp4">
                         </video>
                         <span class="comparison-label label-video">Lookbook</span>
-                        <div class="play-button" onclick="toggleVideo('cream-video-3', this)">
+                        <div class="play-button" onclick="toggleVideo('cream-video-2', this)">
                             <i class="fas fa-play"></i>
                         </div>
                     </div>
                     <div class="showcase-info">
                         <div class="showcase-type">Lookbook Video</div>
                         <div class="showcase-title">Campaign &amp; Lifestyle</div>
+                    </div>
+                </div>
+
+                <!-- Video 3: Social -->
+                <div class="showcase-item">
+                    <div class="showcase-media">
+                        <video id="cream-video-3" loop muted playsinline preload="metadata">
+                            <source src="https://res.cloudinary.com/dtdajp5sw/video/upload/Female1_Vid2_idjuuy.mp4" type="video/mp4">
+                        </video>
+                        <span class="comparison-label label-video">Social</span>
+                        <div class="play-button" onclick="toggleVideo('cream-video-3', this)">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="showcase-info">
+                        <div class="showcase-type">Social Content Clip</div>
+                        <div class="showcase-title">Instagram &amp; TikTok Ready</div>
                     </div>
                 </div>
 
