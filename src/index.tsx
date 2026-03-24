@@ -592,9 +592,9 @@ app.get('/', (c) => {
     ═══════════════════════════════════════════ -->
     <section id="showcase" class="section">
 
-        <!-- ── Row 1: Charcoal Slim-Fit Suit (Male) ── -->
+        <!-- ── Row 1: Navy Slim-Fit Suit (Male) ── -->
         <div class="product-row">
-            <h3 class="product-row-title">Charcoal Slim-Fit Suit</h3>
+            <h3 class="product-row-title">Navy Slim-Fit Suit</h3>
             <div class="showcase-grid">
 
                 <!-- TOP ROW — 3 Images -->
@@ -602,7 +602,7 @@ app.get('/', (c) => {
                 <!-- Image 1: Product Page -->
                 <div class="showcase-item">
                     <div class="showcase-media">
-                        <img src="/static/media/navy-gallery/navy-ai-1.jpg" alt="Product Page Image">
+                        <img src="https://res.cloudinary.com/dtdajp5sw/image/upload/male1_chnmpt.png" alt="Product Page Image">
                         <span class="comparison-label label-enhanced">Product Page</span>
                     </div>
                     <div class="showcase-info">
@@ -614,7 +614,7 @@ app.get('/', (c) => {
                 <!-- Image 2: Campaign -->
                 <div class="showcase-item">
                     <div class="showcase-media">
-                        <img src="/static/media/navy-gallery/navy-ai-2.jpg" alt="Campaign Shot">
+                        <img src="https://res.cloudinary.com/dtdajp5sw/image/upload/male2_qhirhe.png" alt="Campaign Shot">
                         <span class="comparison-label label-enhanced">Campaign</span>
                     </div>
                     <div class="showcase-info">
@@ -626,7 +626,7 @@ app.get('/', (c) => {
                 <!-- Image 3: Detail -->
                 <div class="showcase-item">
                     <div class="showcase-media">
-                        <img src="/static/media/navy-gallery/navy-ai-3.jpg" alt="Detail Close-Up">
+                        <img src="https://res.cloudinary.com/dtdajp5sw/image/upload/male3_hi5cf1.png" alt="Detail Close-Up">
                         <span class="comparison-label label-enhanced">Detail</span>
                     </div>
                     <div class="showcase-info">
@@ -641,7 +641,7 @@ app.get('/', (c) => {
                 <div class="showcase-item">
                     <div class="showcase-media">
                         <video id="navy-video-1" loop muted playsinline preload="metadata">
-                            <source src="${media.navyVideo}" type="video/mp4">
+                            <source src="https://res.cloudinary.com/dtdajp5sw/video/upload/male1_Vid_bnvsux.mp4" type="video/mp4">
                         </video>
                         <span class="comparison-label label-video">Product Video</span>
                         <div class="play-button" onclick="toggleVideo('navy-video-1', this)">
@@ -658,7 +658,7 @@ app.get('/', (c) => {
                 <div class="showcase-item">
                     <div class="showcase-media">
                         <video id="navy-video-2" loop muted playsinline preload="metadata">
-                            <source src="${media.navyVideo}" type="video/mp4">
+                            <source src="https://res.cloudinary.com/dtdajp5sw/video/upload/male1_Vid2_phlucx.mp4" type="video/mp4">
                         </video>
                         <span class="comparison-label label-video">Social</span>
                         <div class="play-button" onclick="toggleVideo('navy-video-2', this)">
@@ -675,7 +675,7 @@ app.get('/', (c) => {
                 <div class="showcase-item">
                     <div class="showcase-media">
                         <video id="navy-video-3" loop muted playsinline preload="metadata">
-                            <source src="${media.navyVideo}" type="video/mp4">
+                            <source src="https://res.cloudinary.com/dtdajp5sw/video/upload/male1_Vid3_ruade2.mp4" type="video/mp4">
                         </video>
                         <span class="comparison-label label-video">Lookbook</span>
                         <div class="play-button" onclick="toggleVideo('navy-video-3', this)">
@@ -691,9 +691,9 @@ app.get('/', (c) => {
             </div>
         </div>
 
-        <!-- ── Row 2: Emerald Cocktail Dress (Female) ── -->
+        <!-- ── Row 2: White Cocktail Dress (Female) ── -->
         <div class="product-row">
-            <h3 class="product-row-title">Emerald Cocktail Dress</h3>
+            <h3 class="product-row-title">White Cocktail Dress</h3>
             <div class="showcase-grid">
 
                 <!-- TOP ROW — 3 Images -->
@@ -701,7 +701,7 @@ app.get('/', (c) => {
                 <!-- Image 1: Product Page -->
                 <div class="showcase-item">
                     <div class="showcase-media">
-                        <img src="/static/media/ivory-gallery/ivory-ai-1.jpg" alt="Product Page Image">
+                        <img src="https://res.cloudinary.com/dtdajp5sw/image/upload/Female1_rdkwoc.png" alt="Product Page Image">
                         <span class="comparison-label label-enhanced">Product Page</span>
                     </div>
                     <div class="showcase-info">
@@ -713,7 +713,7 @@ app.get('/', (c) => {
                 <!-- Image 2: Campaign -->
                 <div class="showcase-item">
                     <div class="showcase-media">
-                        <img src="/static/media/ivory-gallery/ivory-ai-2.jpg" alt="Campaign Shot">
+                        <img src="https://res.cloudinary.com/dtdajp5sw/image/upload/Female2_hypfj9.png" alt="Campaign Shot">
                         <span class="comparison-label label-enhanced">Campaign</span>
                     </div>
                     <div class="showcase-info">
@@ -725,7 +725,7 @@ app.get('/', (c) => {
                 <!-- Image 3: Detail -->
                 <div class="showcase-item">
                     <div class="showcase-media">
-                        <img src="/static/media/ivory-gallery/ivory-ai-3.jpg" alt="Detail Close-Up">
+                        <img src="https://res.cloudinary.com/dtdajp5sw/image/upload/Female3_ajted8.png" alt="Detail Close-Up">
                         <span class="comparison-label label-enhanced">Detail</span>
                     </div>
                     <div class="showcase-info">
@@ -740,7 +740,7 @@ app.get('/', (c) => {
                 <div class="showcase-item">
                     <div class="showcase-media">
                         <video id="cream-video-1" loop muted playsinline preload="metadata">
-                            <source src="${media.creamVideo}" type="video/mp4">
+                            <source src="https://res.cloudinary.com/dtdajp5sw/video/upload/Female1_Vid3_if4sts.mp4" type="video/mp4">
                         </video>
                         <span class="comparison-label label-video">Product Video</span>
                         <div class="play-button" onclick="toggleVideo('cream-video-1', this)">
@@ -757,7 +757,7 @@ app.get('/', (c) => {
                 <div class="showcase-item">
                     <div class="showcase-media">
                         <video id="cream-video-2" loop muted playsinline preload="metadata">
-                            <source src="${media.creamVideo}" type="video/mp4">
+                            <source src="https://res.cloudinary.com/dtdajp5sw/video/upload/Female1_Vid2_idjuuy.mp4" type="video/mp4">
                         </video>
                         <span class="comparison-label label-video">Social</span>
                         <div class="play-button" onclick="toggleVideo('cream-video-2', this)">
@@ -774,7 +774,7 @@ app.get('/', (c) => {
                 <div class="showcase-item">
                     <div class="showcase-media">
                         <video id="cream-video-3" loop muted playsinline preload="metadata">
-                            <source src="${media.creamVideo}" type="video/mp4">
+                            <source src="https://res.cloudinary.com/dtdajp5sw/video/upload/kling_20260324_Image_to_Video_Video_1__P_3221_0_qhwnvc.mp4" type="video/mp4">
                         </video>
                         <span class="comparison-label label-video">Lookbook</span>
                         <div class="play-button" onclick="toggleVideo('cream-video-3', this)">
