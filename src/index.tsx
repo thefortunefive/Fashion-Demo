@@ -7,19 +7,18 @@ const app = new Hono()
 app.use('/static/*', serveStatic())
 
 // Local paths for images and videos (served from /static/media/)
-const images = {
-  creamSuit1: '/static/media/cream-suit-1.jpg',
-  navySuit1: '/static/media/navy-suit-1.jpg',
-  creamSuit2: '/static/media/cream-suit-2.jpg',
-  navySuit2: '/static/media/navy-suit-2.jpg'
+const media = {
+  // Navy Suit
+  navyOriginal: '/static/media/navy-suit-1.jpg',
+  navyEnhanced: '/static/media/navy-suit-2.jpg',
+  navyVideo: '/static/media/navy-walk.mp4',
+  // Cream Suit  
+  creamOriginal: '/static/media/cream-suit-1.jpg',
+  creamEnhanced: '/static/media/cream-suit-2.jpg',
+  creamVideo: '/static/media/cream-walk.mp4'
 }
 
-const videos = {
-  creamWalk: '/static/media/cream-walk.mp4',
-  navyWalk: '/static/media/navy-walk.mp4'
-}
-
-// Main page - Suitsupply style
+// Main page - 5th Ave Fashion style
 app.get('/', (c) => {
   return c.html(`
 <!DOCTYPE html>
@@ -27,7 +26,7 @@ app.get('/', (c) => {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Content Studio | Suitsupply</title>
+    <title>5th Ave Fashion Content Studio</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -118,18 +117,9 @@ app.get('/', (c) => {
         /* Hero Section */
         .hero {
             margin-top: 72px;
-            height: calc(100vh - 72px);
+            padding: 80px 60px;
             background: linear-gradient(135deg, var(--ss-cream) 0%, var(--ss-white) 100%);
-            display: flex;
-            align-items: center;
-            padding: 0 80px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-content {
-            max-width: 600px;
-            z-index: 2;
+            text-align: center;
         }
 
         .hero-tag {
@@ -138,89 +128,29 @@ app.get('/', (c) => {
             letter-spacing: 3px;
             text-transform: uppercase;
             color: var(--ss-accent);
-            margin-bottom: 24px;
+            margin-bottom: 16px;
         }
 
         .hero-title {
             font-family: 'Playfair Display', serif;
-            font-size: 64px;
+            font-size: 48px;
             font-weight: 500;
-            line-height: 1.1;
-            margin-bottom: 24px;
+            line-height: 1.2;
+            margin-bottom: 16px;
             color: var(--ss-black);
         }
 
         .hero-subtitle {
-            font-size: 18px;
+            font-size: 16px;
             color: var(--ss-gray);
-            margin-bottom: 40px;
+            max-width: 600px;
+            margin: 0 auto;
             font-weight: 300;
-        }
-
-        .hero-video {
-            position: absolute;
-            right: 80px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 400px;
-            border-radius: 4px;
-            overflow: hidden;
-            box-shadow: 0 40px 80px rgba(0,0,0,0.15);
-        }
-
-        .hero-video video {
-            width: 100%;
-            display: block;
-        }
-
-        .btn-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background: var(--ss-black);
-            color: var(--ss-white);
-            padding: 16px 32px;
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            text-decoration: none;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary:hover {
-            background: var(--ss-dark);
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background: transparent;
-            color: var(--ss-black);
-            padding: 16px 32px;
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            text-decoration: none;
-            border: 1px solid var(--ss-black);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-left: 16px;
-        }
-
-        .btn-secondary:hover {
-            background: var(--ss-black);
-            color: var(--ss-white);
         }
 
         /* Section Styles */
         .section {
-            padding: 120px 80px;
+            padding: 80px 60px;
         }
 
         .section-dark {
@@ -235,7 +165,7 @@ app.get('/', (c) => {
         .section-header {
             text-align: center;
             max-width: 800px;
-            margin: 0 auto 80px;
+            margin: 0 auto 60px;
         }
 
         .section-tag {
@@ -244,18 +174,18 @@ app.get('/', (c) => {
             letter-spacing: 3px;
             text-transform: uppercase;
             color: var(--ss-accent);
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
 
         .section-title {
             font-family: 'Playfair Display', serif;
-            font-size: 48px;
+            font-size: 36px;
             font-weight: 500;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
         }
 
         .section-subtitle {
-            font-size: 16px;
+            font-size: 15px;
             color: var(--ss-gray);
             font-weight: 300;
         }
@@ -264,42 +194,61 @@ app.get('/', (c) => {
             color: rgba(255,255,255,0.6);
         }
 
-        /* Video Showcase */
-        .video-showcase {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 40px;
-            max-width: 1200px;
-            margin: 0 auto;
+        /* Product Row - Original → Enhanced → Video */
+        .product-row {
+            max-width: 1400px;
+            margin: 0 auto 80px;
         }
 
-        .video-card {
-            position: relative;
+        .product-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .product-row-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--ss-black);
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .comparison-item {
             background: var(--ss-white);
             border-radius: 4px;
             overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
         }
 
-        .video-wrapper {
+        .comparison-media {
             position: relative;
-            aspect-ratio: 9/16;
-            max-height: 600px;
+            aspect-ratio: 3/4;
             overflow: hidden;
+            background: var(--ss-light-gray);
         }
 
-        .video-wrapper video {
+        .comparison-media img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        .video-label {
+        .comparison-media video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        .comparison-label {
             position: absolute;
-            top: 20px;
-            left: 20px;
-            background: rgba(0,0,0,0.8);
-            color: var(--ss-white);
+            top: 16px;
+            left: 16px;
             padding: 8px 16px;
             font-size: 10px;
             font-weight: 600;
@@ -308,92 +257,78 @@ app.get('/', (c) => {
             border-radius: 2px;
         }
 
-        .video-label.ai {
-            background: var(--ss-accent);
+        .label-original {
+            background: var(--ss-dark);
+            color: var(--ss-white);
         }
 
-        .video-info {
-            padding: 24px;
-        }
-
-        .video-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 20px;
-            margin-bottom: 8px;
-        }
-
-        .video-desc {
-            font-size: 13px;
-            color: var(--ss-gray);
-        }
-
-        /* Product Grid */
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .product-card {
-            background: var(--ss-white);
-            overflow: hidden;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .product-card:hover {
-            transform: translateY(-8px);
-        }
-
-        .product-image {
-            position: relative;
-            aspect-ratio: 3/4;
-            overflow: hidden;
-            background: var(--ss-light-gray);
-        }
-
-        .product-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease;
-        }
-
-        .product-card:hover .product-image img {
-            transform: scale(1.05);
-        }
-
-        .product-badge {
-            position: absolute;
-            top: 16px;
-            left: 16px;
+        .label-enhanced {
             background: var(--ss-accent);
             color: var(--ss-white);
-            padding: 6px 12px;
-            font-size: 9px;
+        }
+
+        .label-video {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--ss-white);
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px;
+            height: 70px;
+            background: rgba(255,255,255,0.95);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .play-button:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+            background: var(--ss-white);
+        }
+
+        .play-button i {
+            font-size: 24px;
+            color: var(--ss-black);
+            margin-left: 4px;
+        }
+
+        .play-button.playing i:before {
+            content: "\\f04c";
+        }
+
+        .comparison-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .comparison-type {
+            font-size: 11px;
             font-weight: 600;
-            letter-spacing: 1.5px;
+            letter-spacing: 2px;
             text-transform: uppercase;
-        }
-
-        .product-info {
-            padding: 20px 0;
-        }
-
-        .product-name {
-            font-size: 14px;
-            font-weight: 500;
+            color: var(--ss-gray);
             margin-bottom: 6px;
         }
 
-        .product-price {
-            font-size: 13px;
-            color: var(--ss-gray);
+        .comparison-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
         }
 
-        /* AI Features Grid */
+        /* Arrow between items */
+        .arrow-connector {
+            display: none;
+        }
+
+        /* Features Section */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -404,33 +339,28 @@ app.get('/', (c) => {
 
         .feature-card {
             text-align: center;
-            padding: 40px;
+            padding: 40px 30px;
             background: rgba(255,255,255,0.05);
             border-radius: 4px;
-            transition: all 0.3s ease;
-        }
-
-        .feature-card:hover {
-            background: rgba(255,255,255,0.1);
-            transform: translateY(-4px);
         }
 
         .feature-icon {
             width: 64px;
             height: 64px;
-            margin: 0 auto 24px;
+            margin: 0 auto 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             background: var(--ss-accent);
             border-radius: 50%;
             font-size: 24px;
+            color: var(--ss-white);
         }
 
         .feature-title {
             font-family: 'Playfair Display', serif;
-            font-size: 22px;
-            margin-bottom: 12px;
+            font-size: 20px;
+            margin-bottom: 10px;
         }
 
         .feature-desc {
@@ -439,235 +369,186 @@ app.get('/', (c) => {
             line-height: 1.7;
         }
 
-        /* Social Content Section */
-        .social-grid {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 4px;
-        }
-
-        .social-item {
-            position: relative;
-            aspect-ratio: 1;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        .social-item img,
-        .social-item video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .social-item:hover img,
-        .social-item:hover video {
-            transform: scale(1.1);
-        }
-
-        .social-overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(0,0,0,0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .social-item:hover .social-overlay {
-            opacity: 1;
-        }
-
-        .social-icon {
-            color: var(--ss-white);
-            font-size: 24px;
-        }
-
-        /* Stats Section */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 40px;
-            max-width: 1000px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .stat-item {
-            padding: 20px;
-        }
-
-        .stat-number {
-            font-family: 'Playfair Display', serif;
-            font-size: 56px;
-            font-weight: 500;
-            color: var(--ss-accent);
-            margin-bottom: 8px;
-        }
-
-        .stat-label {
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.6);
-        }
-
         /* CTA Section */
         .cta-section {
             text-align: center;
             background: linear-gradient(135deg, var(--ss-navy) 0%, var(--ss-black) 100%);
             color: var(--ss-white);
+            padding: 100px 60px;
         }
 
         .cta-title {
             font-family: 'Playfair Display', serif;
-            font-size: 48px;
-            margin-bottom: 20px;
+            font-size: 40px;
+            margin-bottom: 16px;
         }
 
         .cta-text {
             font-size: 16px;
             color: rgba(255,255,255,0.7);
-            margin-bottom: 40px;
-            max-width: 600px;
+            margin-bottom: 30px;
+            max-width: 500px;
             margin-left: auto;
             margin-right: auto;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--ss-white);
+            color: var(--ss-black);
+            padding: 16px 32px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: var(--ss-cream);
+            transform: translateY(-2px);
         }
 
         /* Footer */
         .footer {
             background: var(--ss-black);
             color: var(--ss-white);
-            padding: 80px;
-        }
-
-        .footer-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 2fr repeat(3, 1fr);
-            gap: 60px;
+            padding: 60px;
+            text-align: center;
         }
 
         .footer-brand {
             font-family: 'Playfair Display', serif;
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 600;
             letter-spacing: 2px;
             text-transform: uppercase;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
         .footer-text {
-            font-size: 14px;
-            color: rgba(255,255,255,0.6);
-            line-height: 1.8;
-        }
-
-        .footer-title {
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 24px;
-        }
-
-        .footer-links a {
-            display: block;
-            font-size: 14px;
-            color: rgba(255,255,255,0.6);
-            text-decoration: none;
-            margin-bottom: 12px;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: var(--ss-white);
-        }
-
-        .footer-bottom {
-            max-width: 1200px;
-            margin: 60px auto 0;
-            padding-top: 40px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .footer-copyright {
             font-size: 13px;
-            color: rgba(255,255,255,0.4);
+            color: rgba(255,255,255,0.5);
+            max-width: 500px;
+            margin: 0 auto;
         }
 
-        .footer-social {
-            display: flex;
+        /* AI Gallery Grid */
+        .gallery-section {
+            padding: 80px 60px;
+            background: var(--ss-cream);
+        }
+
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
         }
 
-        .footer-social a {
-            color: rgba(255,255,255,0.6);
-            font-size: 18px;
-            transition: color 0.3s ease;
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 3/4;
+            overflow: hidden;
+            border-radius: 4px;
+            cursor: pointer;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
         }
 
-        .footer-social a:hover {
+        .gallery-item:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 50px rgba(0,0,0,0.15);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-item-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            padding: 6px 12px;
+            background: var(--ss-accent);
             color: var(--ss-white);
+            border-radius: 2px;
+            font-size: 9px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.95);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            background: rgba(255,255,255,0.2);
         }
 
         /* Responsive */
-        @media (max-width: 1200px) {
-            .hero-video {
-                width: 320px;
-                right: 40px;
-            }
-            .product-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 992px) {
-            .hero {
-                flex-direction: column;
-                padding: 60px 40px;
-                height: auto;
-                min-height: calc(100vh - 72px);
-            }
-            .hero-content {
-                text-align: center;
-                margin-bottom: 60px;
-            }
-            .hero-title {
-                font-size: 48px;
-            }
-            .hero-video {
-                position: relative;
-                right: 0;
-                top: 0;
-                transform: none;
-            }
-            .section {
-                padding: 80px 40px;
+        @media (max-width: 1024px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin: 0 auto;
             }
             .features-grid {
                 grid-template-columns: 1fr;
             }
-            .video-showcase {
-                grid-template-columns: 1fr;
-            }
-            .stats-grid {
+            .gallery-grid {
                 grid-template-columns: repeat(2, 1fr);
-            }
-            .social-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            .footer-inner {
-                grid-template-columns: 1fr;
-                gap: 40px;
             }
         }
 
@@ -676,13 +557,20 @@ app.get('/', (c) => {
                 display: none;
             }
             .hero-title {
-                font-size: 36px;
-            }
-            .section-title {
                 font-size: 32px;
             }
-            .product-grid {
-                grid-template-columns: 1fr;
+            .section {
+                padding: 60px 30px;
+            }
+            .section-title {
+                font-size: 28px;
+            }
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            .gallery-section {
+                padding: 60px 30px;
             }
         }
     </style>
@@ -691,308 +579,323 @@ app.get('/', (c) => {
     <!-- Navigation -->
     <nav class="nav">
         <div class="nav-inner">
-            <a href="/" class="logo">Suitsupply</a>
+            <a href="/" class="logo">5th Ave Fashion</a>
             <div class="nav-links">
-                <a href="#video">AI Video<span class="nav-badge">New</span></a>
-                <a href="#images">AI Images</a>
+                <a href="#showcase">AI Showcase<span class="nav-badge">New</span></a>
                 <a href="#features">Features</a>
-                <a href="#social">Social</a>
+                <a href="#contact">Contact</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-content">
-            <div class="hero-tag">AI Content Studio</div>
-            <h1 class="hero-title">Transform Your Fashion Content With AI</h1>
-            <p class="hero-subtitle">Create stunning product videos, enhanced imagery, and social media content using cutting-edge AI technology. Elevate your brand's visual storytelling.</p>
-            <a href="#video" class="btn-primary">
-                <span>Explore Videos</span>
-                <i class="fas fa-arrow-right"></i>
-            </a>
-            <a href="#features" class="btn-secondary">
-                <span>Learn More</span>
-            </a>
-        </div>
-        <div class="hero-video">
-            <video autoplay muted loop playsinline>
-                <source src="${videos.creamWalk}" type="video/mp4">
-            </video>
-        </div>
+        <div class="hero-tag">5th Ave Fashion Content Studio</div>
+        <h1 class="hero-title">AI-Powered Content for Fashion Brands</h1>
+        <p class="hero-subtitle">See how AI transforms static product photography into enhanced visuals, dynamic 360° videos, and scroll-stopping social content.</p>
     </section>
 
-    <!-- Video Showcase Section -->
-    <section id="video" class="section">
+    <!-- Product Showcase Section -->
+    <section id="showcase" class="section">
         <div class="section-header">
-            <div class="section-tag">AI-Powered Video</div>
-            <h2 class="section-title">360° Product Videos</h2>
-            <p class="section-subtitle">High-end lookbook style content featuring slow pivots, studio lighting, and premium cinematography - all enhanced or generated with AI.</p>
+            <div class="section-tag">AI Transformation</div>
+            <h2 class="section-title">Original → AI Enhanced → AI Video</h2>
+            <p class="section-subtitle">Watch how we take original product photography and transform it into enhanced imagery and moving content.</p>
         </div>
-        <div class="video-showcase">
-            <div class="video-card">
-                <div class="video-wrapper">
-                    <video autoplay muted loop playsinline>
-                        <source src="${videos.creamWalk}" type="video/mp4">
-                    </video>
-                    <span class="video-label">Original</span>
+
+        <!-- Navy Birdseye Suit Row -->
+        <div class="product-row">
+            <h3 class="product-row-title">Charcoal Slim-Fit Suit</h3>
+            <div class="comparison-grid">
+                <!-- Original -->
+                <div class="comparison-item">
+                    <div class="comparison-media">
+                        <img src="${media.navyOriginal}" alt="Navy Suit Original">
+                        <span class="comparison-label label-original">Original</span>
+                    </div>
+                    <div class="comparison-info">
+                        <div class="comparison-type">Source Image</div>
+                        <div class="comparison-title">Product Photography</div>
+                    </div>
                 </div>
-                <div class="video-info">
-                    <h3 class="video-title">Ivory Three-Piece Suit</h3>
-                    <p class="video-desc">Double-breasted peak lapel suit in textured wool-crepe. 360° rotation showcase with high-key studio lighting.</p>
+
+                <!-- AI Enhanced -->
+                <div class="comparison-item">
+                    <div class="comparison-media">
+                        <img src="${media.navyEnhanced}" alt="Navy Suit AI Enhanced">
+                        <span class="comparison-label label-enhanced">AI Enhanced</span>
+                    </div>
+                    <div class="comparison-info">
+                        <div class="comparison-type">Enhanced Image</div>
+                        <div class="comparison-title">Color & Detail Optimization</div>
+                    </div>
+                </div>
+
+                <!-- AI Video -->
+                <div class="comparison-item">
+                    <div class="comparison-media">
+                        <video id="navy-video" loop muted playsinline preload="metadata">
+                            <source src="${media.navyVideo}" type="video/mp4">
+                        </video>
+                        <span class="comparison-label label-video">AI Video</span>
+                        <div class="play-button" onclick="toggleVideo('navy-video', this)">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="comparison-info">
+                        <div class="comparison-type">360° Video</div>
+                        <div class="comparison-title">AI-Generated Motion</div>
+                    </div>
                 </div>
             </div>
-            <div class="video-card">
-                <div class="video-wrapper">
-                    <video autoplay muted loop playsinline>
-                        <source src="${videos.navyWalk}" type="video/mp4">
-                    </video>
-                    <span class="video-label ai">AI Enhanced</span>
+
+            <!-- Navy AI Generated Gallery -->
+            <div class="gallery-inline" style="margin-top: 40px;">
+                <h4 style="font-family: 'Playfair Display', serif; font-size: 20px; text-align: center; margin-bottom: 24px; color: var(--ss-gray);">AI Generated Collection</h4>
+                <div class="gallery-grid">
+                    <div class="gallery-item" onclick="openLightbox('/static/media/navy-gallery/navy-ai-1.jpg')">
+                        <img src="/static/media/navy-gallery/navy-ai-1.jpg" alt="AI Generated Image">
+                        <span class="gallery-item-badge">AI Generated Image</span>
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox('/static/media/navy-gallery/navy-ai-2.jpg')">
+                        <img src="/static/media/navy-gallery/navy-ai-2.jpg" alt="AI Generated Image">
+                        <span class="gallery-item-badge">AI Generated Image</span>
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox('/static/media/navy-gallery/navy-ai-3.jpg')">
+                        <img src="/static/media/navy-gallery/navy-ai-3.jpg" alt="AI Generated Image">
+                        <span class="gallery-item-badge">AI Generated Image</span>
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox('/static/media/navy-gallery/navy-ai-4.jpg')">
+                        <img src="/static/media/navy-gallery/navy-ai-4.jpg" alt="AI Generated Image">
+                        <span class="gallery-item-badge">AI Generated Image</span>
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox('/static/media/navy-gallery/navy-ai-5.jpg')">
+                        <img src="/static/media/navy-gallery/navy-ai-5.jpg" alt="AI Generated Image">
+                        <span class="gallery-item-badge">AI Generated Image</span>
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox('/static/media/navy-gallery/navy-ai-6.jpg')">
+                        <img src="/static/media/navy-gallery/navy-ai-6.jpg" alt="AI Generated Image">
+                        <span class="gallery-item-badge">AI Generated Image</span>
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox('/static/media/navy-gallery/navy-ai-7.jpg')">
+                        <img src="/static/media/navy-gallery/navy-ai-7.jpg" alt="AI Generated Image">
+                        <span class="gallery-item-badge">AI Generated Image</span>
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox('/static/media/navy-gallery/navy-ai-8.jpg')">
+                        <img src="/static/media/navy-gallery/navy-ai-8.jpg" alt="AI Generated Image">
+                        <span class="gallery-item-badge">AI Generated Image</span>
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox('/static/media/navy-gallery/navy-ai-9.jpg')">
+                        <img src="/static/media/navy-gallery/navy-ai-9.jpg" alt="AI Generated Image">
+                        <span class="gallery-item-badge">AI Generated Image</span>
+                    </div>
                 </div>
-                <div class="video-info">
-                    <h3 class="video-title">Navy Birdseye Suit</h3>
-                    <p class="video-desc">Two-button single-breasted suit in Naples Blue. AI-enhanced color grading and motion smoothing.</p>
+            </div>
+        </div>
+
+        <!-- Ivory/Cream Suit Row -->
+        <div class="product-row">
+            <h3 class="product-row-title">Cream Linen Two-Piece Suit</h3>
+            <div class="comparison-grid">
+                <!-- Original -->
+                <div class="comparison-item">
+                    <div class="comparison-media">
+                        <img src="${media.creamOriginal}" alt="Ivory Suit Original">
+                        <span class="comparison-label label-original">Original</span>
+                    </div>
+                    <div class="comparison-info">
+                        <div class="comparison-type">Source Image</div>
+                        <div class="comparison-title">Product Photography</div>
+                    </div>
+                </div>
+
+                <!-- AI Enhanced -->
+                <div class="comparison-item">
+                    <div class="comparison-media">
+                        <img src="${media.creamEnhanced}" alt="Ivory Suit AI Enhanced">
+                        <span class="comparison-label label-enhanced">AI Enhanced</span>
+                    </div>
+                    <div class="comparison-info">
+                        <div class="comparison-type">Enhanced Image</div>
+                        <div class="comparison-title">Lighting & Background</div>
+                    </div>
+                </div>
+
+                <!-- AI Video -->
+                <div class="comparison-item">
+                    <div class="comparison-media">
+                        <video id="cream-video" loop muted playsinline preload="metadata">
+                            <source src="${media.creamVideo}" type="video/mp4">
+                        </video>
+                        <span class="comparison-label label-video">AI Video</span>
+                        <div class="play-button" onclick="toggleVideo('cream-video', this)">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="comparison-info">
+                        <div class="comparison-type">360° Video</div>
+                        <div class="comparison-title">AI-Generated Motion</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ivory AI Generated Gallery -->
+            <div class="gallery-inline" style="margin-top: 40px;">
+                <h4 style="font-family: 'Playfair Display', serif; font-size: 20px; text-align: center; margin-bottom: 24px; color: var(--ss-gray);">AI Generated Collection</h4>
+                <div class="gallery-grid">
+                    <div class="gallery-item" onclick="openLightbox('/static/media/ivory-gallery/ivory-ai-1.jpg')">
+                        <img src="/static/media/ivory-gallery/ivory-ai-1.jpg" alt="AI Generated Image">
+                        <span class="gallery-item-badge">AI Generated Image</span>
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox('/static/media/ivory-gallery/ivory-ai-2.jpg')">
+                        <img src="/static/media/ivory-gallery/ivory-ai-2.jpg" alt="AI Generated Image">
+                        <span class="gallery-item-badge">AI Generated Image</span>
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox('/static/media/ivory-gallery/ivory-ai-3.jpg')">
+                        <img src="/static/media/ivory-gallery/ivory-ai-3.jpg" alt="AI Generated Image">
+                        <span class="gallery-item-badge">AI Generated Image</span>
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox('/static/media/ivory-gallery/ivory-ai-4.jpg')">
+                        <img src="/static/media/ivory-gallery/ivory-ai-4.jpg" alt="AI Generated Image">
+                        <span class="gallery-item-badge">AI Generated Image</span>
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox('/static/media/ivory-gallery/ivory-ai-5.jpg')">
+                        <img src="/static/media/ivory-gallery/ivory-ai-5.jpg" alt="AI Generated Image">
+                        <span class="gallery-item-badge">AI Generated Image</span>
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox('/static/media/ivory-gallery/ivory-ai-6.jpg')">
+                        <img src="/static/media/ivory-gallery/ivory-ai-6.jpg" alt="AI Generated Image">
+                        <span class="gallery-item-badge">AI Generated Image</span>
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox('/static/media/ivory-gallery/ivory-ai-7.jpg')">
+                        <img src="/static/media/ivory-gallery/ivory-ai-7.jpg" alt="AI Generated Image">
+                        <span class="gallery-item-badge">AI Generated Image</span>
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox('/static/media/ivory-gallery/ivory-ai-8.jpg')">
+                        <img src="/static/media/ivory-gallery/ivory-ai-8.jpg" alt="AI Generated Image">
+                        <span class="gallery-item-badge">AI Generated Image</span>
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox('/static/media/ivory-gallery/ivory-ai-9.jpg')">
+                        <img src="/static/media/ivory-gallery/ivory-ai-9.jpg" alt="AI Generated Image">
+                        <span class="gallery-item-badge">AI Generated Image</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Product Images Section -->
-    <section id="images" class="section section-cream">
-        <div class="section-header">
-            <div class="section-tag">AI-Enhanced Photography</div>
-            <h2 class="section-title">Product Gallery</h2>
-            <p class="section-subtitle">Studio-quality product photography with AI-powered enhancements: background removal, color correction, and model variations.</p>
-        </div>
-        <div class="product-grid">
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="${images.creamSuit1}" alt="Cream Suit Close-up">
-                    <span class="product-badge">AI Optimized</span>
-                </div>
-                <div class="product-info">
-                    <h3 class="product-name">Off-White Three-Piece Suit</h3>
-                    <p class="product-price">$1,299</p>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="${images.navySuit1}" alt="Navy Suit Close-up">
-                    <span class="product-badge">AI Enhanced</span>
-                </div>
-                <div class="product-info">
-                    <h3 class="product-name">Navy Birdseye Suit</h3>
-                    <p class="product-price">$899</p>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="${images.creamSuit2}" alt="Cream Suit Full View">
-                    <span class="product-badge">Original</span>
-                </div>
-                <div class="product-info">
-                    <h3 class="product-name">Ivory Double-Breasted Suit</h3>
-                    <p class="product-price">$1,499</p>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="${images.navySuit2}" alt="Navy Suit Full View">
-                    <span class="product-badge">AI Styled</span>
-                </div>
-                <div class="product-info">
-                    <h3 class="product-name">Classic Navy Two-Piece</h3>
-                    <p class="product-price">$999</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- AI Features Section -->
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" onclick="closeLightbox()">
+            <i class="fas fa-times"></i>
+        </button>
+        <img id="lightbox-img" src="" alt="Enlarged view">
+    </div>
+
+    <!-- Features Section -->
     <section id="features" class="section section-dark">
         <div class="section-header">
             <div class="section-tag">AI Capabilities</div>
             <h2 class="section-title">What AI Can Create</h2>
-            <p class="section-subtitle">Transform your content strategy with powerful AI tools designed for luxury fashion brands.</p>
+            <p class="section-subtitle">Transform your content strategy with powerful AI tools.</p>
         </div>
         <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-video"></i>
-                </div>
-                <h3 class="feature-title">AI Video Generation</h3>
-                <p class="feature-desc">Create 360° product rotations, lifestyle videos, and runway content. AI handles smooth motion, perfect lighting, and professional cinematography.</p>
-            </div>
             <div class="feature-card">
                 <div class="feature-icon">
                     <i class="fas fa-image"></i>
                 </div>
                 <h3 class="feature-title">Image Enhancement</h3>
-                <p class="feature-desc">Automatic background removal, color correction, model variations, and virtual try-on capabilities. Maintain brand consistency at scale.</p>
+                <p class="feature-desc">Automatic background optimization, color correction, and detail enhancement while maintaining brand consistency.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-video"></i>
+                </div>
+                <h3 class="feature-title">Video Generation</h3>
+                <p class="feature-desc">Create 360° product rotations and lifestyle videos from static images with smooth, professional motion.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
                     <i class="fas fa-share-alt"></i>
                 </div>
                 <h3 class="feature-title">Social Content</h3>
-                <p class="feature-desc">Generate Instagram posts, TikTok videos, and Stories automatically. AI adapts content for each platform's optimal dimensions and style.</p>
-            </div>
-        </div>
-        
-        <!-- Stats -->
-        <div class="stats-grid" style="margin-top: 80px;">
-            <div class="stat-item">
-                <div class="stat-number">10x</div>
-                <div class="stat-label">Faster Production</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">70%</div>
-                <div class="stat-label">Cost Reduction</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">∞</div>
-                <div class="stat-label">Variations</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">24/7</div>
-                <div class="stat-label">Content Generation</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Social Media Content Section -->
-    <section id="social" class="section">
-        <div class="section-header">
-            <div class="section-tag">Social Ready</div>
-            <h2 class="section-title">AI-Generated Social Content</h2>
-            <p class="section-subtitle">From product stills to engaging video clips, AI creates scroll-stopping content for every platform.</p>
-        </div>
-        <div class="social-grid">
-            <div class="social-item">
-                <img src="${images.creamSuit1}" alt="Social content">
-                <div class="social-overlay">
-                    <i class="fab fa-instagram social-icon"></i>
-                </div>
-            </div>
-            <div class="social-item">
-                <video autoplay muted loop playsinline>
-                    <source src="${videos.creamWalk}" type="video/mp4">
-                </video>
-                <div class="social-overlay">
-                    <i class="fab fa-tiktok social-icon"></i>
-                </div>
-            </div>
-            <div class="social-item">
-                <img src="${images.navySuit1}" alt="Social content">
-                <div class="social-overlay">
-                    <i class="fab fa-instagram social-icon"></i>
-                </div>
-            </div>
-            <div class="social-item">
-                <img src="${images.creamSuit2}" alt="Social content">
-                <div class="social-overlay">
-                    <i class="fab fa-facebook social-icon"></i>
-                </div>
-            </div>
-            <div class="social-item">
-                <video autoplay muted loop playsinline>
-                    <source src="${videos.navyWalk}" type="video/mp4">
-                </video>
-                <div class="social-overlay">
-                    <i class="fab fa-youtube social-icon"></i>
-                </div>
-            </div>
-            <div class="social-item">
-                <img src="${images.navySuit2}" alt="Social content">
-                <div class="social-overlay">
-                    <i class="fab fa-instagram social-icon"></i>
-                </div>
+                <p class="feature-desc">Generate platform-optimized content for Instagram, TikTok, and YouTube automatically.</p>
             </div>
         </div>
     </section>
 
     <!-- CTA Section -->
-    <section class="section cta-section">
+    <section id="contact" class="cta-section">
         <div class="section-tag">Get Started</div>
-        <h2 class="cta-title">Ready to Transform Your Content?</h2>
-        <p class="cta-text">Partner with us to bring AI-powered content creation to your fashion brand. Scale your visual storytelling without limits.</p>
+        <h2 class="cta-title">Ready to Upgrade Your Fashion Content?</h2>
+        <p class="cta-text">AI-powered product visuals, video, and social content — built for fashion brands ready to move faster.</p>
         <a href="#" class="btn-primary">
-            <span>Schedule Demo</span>
-            <i class="fas fa-calendar"></i>
-        </a>
-        <a href="#" class="btn-secondary" style="border-color: rgba(255,255,255,0.3); color: var(--ss-white);">
-            <span>Contact Us</span>
+            <span>Get Started</span>
+            <i class="fas fa-arrow-right"></i>
         </a>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="footer-inner">
-            <div>
-                <div class="footer-brand">Suitsupply</div>
-                <p class="footer-text">This is a demonstration page showcasing AI-powered content creation capabilities for luxury fashion brands. All imagery and video content is used for demonstration purposes.</p>
-            </div>
-            <div>
-                <h4 class="footer-title">AI Services</h4>
-                <div class="footer-links">
-                    <a href="#">Video Generation</a>
-                    <a href="#">Image Enhancement</a>
-                    <a href="#">Social Content</a>
-                    <a href="#">Virtual Try-On</a>
-                </div>
-            </div>
-            <div>
-                <h4 class="footer-title">Resources</h4>
-                <div class="footer-links">
-                    <a href="#">Case Studies</a>
-                    <a href="#">Documentation</a>
-                    <a href="#">API Access</a>
-                    <a href="#">Pricing</a>
-                </div>
-            </div>
-            <div>
-                <h4 class="footer-title">Contact</h4>
-                <div class="footer-links">
-                    <a href="#">Schedule Demo</a>
-                    <a href="#">Support</a>
-                    <a href="#">Partnerships</a>
-                    <a href="#">Press</a>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p class="footer-copyright">© 2024 AI Content Studio Demo. For demonstration purposes only.</p>
-            <div class="footer-social">
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-tiktok"></i></a>
-                <a href="#"><i class="fab fa-youtube"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-            </div>
-        </div>
+        <div class="footer-brand">5th Ave Fashion</div>
+        <p class="footer-text">This is a demonstration page showcasing AI-powered content creation capabilities. All imagery and video content is used for demonstration purposes.</p>
     </footer>
 
     <script>
-        // Smooth scrolling for navigation links
+        function toggleVideo(videoId, button) {
+            const video = document.getElementById(videoId);
+            if (video.paused) {
+                video.play();
+                button.classList.add('playing');
+                button.querySelector('i').classList.remove('fa-play');
+                button.querySelector('i').classList.add('fa-pause');
+            } else {
+                video.pause();
+                button.classList.remove('playing');
+                button.querySelector('i').classList.remove('fa-pause');
+                button.querySelector('i').classList.add('fa-play');
+            }
+        }
+
+        // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
 
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('.nav');
-            if (window.scrollY > 50) {
-                nav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
-            } else {
-                nav.style.boxShadow = 'none';
+        // Lightbox functions
+        function openLightbox(imgSrc) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = imgSrc;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close lightbox on background click
+        document.getElementById('lightbox').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeLightbox();
+            }
+        });
+
+        // Close lightbox on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeLightbox();
             }
         });
     </script>
@@ -1001,23 +904,22 @@ app.get('/', (c) => {
   `)
 })
 
-// API endpoint for demo data
+// API endpoint
 app.get('/api/content', (c) => {
   return c.json({
-    images: [
-      { id: 1, url: images.creamSuit1, title: 'Off-White Three-Piece', type: 'ai-optimized' },
-      { id: 2, url: images.navySuit1, title: 'Navy Birdseye', type: 'ai-enhanced' },
-      { id: 3, url: images.creamSuit2, title: 'Ivory Double-Breasted', type: 'original' },
-      { id: 4, url: images.navySuit2, title: 'Classic Navy Two-Piece', type: 'ai-styled' }
-    ],
-    videos: [
-      { id: 1, url: videos.creamWalk, title: 'Ivory Suit 360°', duration: '10s' },
-      { id: 2, url: videos.navyWalk, title: 'Navy Suit 360°', duration: '10s' }
-    ],
-    features: [
-      { icon: 'video', title: 'AI Video Generation', desc: 'Create 360° product rotations and lifestyle content' },
-      { icon: 'image', title: 'Image Enhancement', desc: 'Background removal, color correction, model variations' },
-      { icon: 'share', title: 'Social Content', desc: 'Platform-optimized content for Instagram, TikTok, YouTube' }
+    products: [
+      {
+        name: 'Charcoal Slim-Fit Suit',
+        original: media.navyOriginal,
+        enhanced: media.navyEnhanced,
+        video: media.navyVideo
+      },
+      {
+        name: 'Cream Linen Two-Piece Suit',
+        original: media.creamOriginal,
+        enhanced: media.creamEnhanced,
+        video: media.creamVideo
+      }
     ]
   })
 })
