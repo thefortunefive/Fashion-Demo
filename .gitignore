@@ -1,5 +1,5 @@
 # prod
-dist/
+# dist/ is committed so Cloudflare Pages deploys pre-built output directly
 
 # dev
 .yarn/
