@@ -6,7 +6,7 @@ const app = new Hono()
 // Serve static files
 app.use('/static/*', serveStatic())
 
-// Main page - 5th Ave Fashion style
+// Main page - Fifth Ave Fashion style
 app.get('/', (c) => {
   return c.html(`
 <!DOCTYPE html>
@@ -14,7 +14,7 @@ app.get('/', (c) => {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>5th Ave Fashion Content Studio</title>
+    <title>Fifth Ave Fashion Content Studio</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -602,7 +602,7 @@ app.get('/', (c) => {
     <!-- SECTION 1 — NAVIGATION + HERO -->
     <nav class="nav">
         <div class="nav-inner">
-            <a href="/" class="logo">5th Ave Fashion</a>
+            <a href="/" class="logo">Fifth Ave Fashion</a>
             <div class="nav-links">
                 <a href="#showcase">AI Showcase<span class="nav-badge">New</span></a>
                 <a href="#features">Features</a>
@@ -907,7 +907,7 @@ app.get('/', (c) => {
     </section>
 
     <footer class="footer">
-        <div class="footer-brand">5th Ave Fashion</div>
+        <div class="footer-brand">Fifth Ave Fashion</div>
         <p class="footer-text">This is a demonstration page showcasing AI-powered content creation capabilities. All imagery and video content is used for demonstration purposes.</p>
     </footer>
 
