@@ -6,18 +6,6 @@ const app = new Hono()
 // Serve static files
 app.use('/static/*', serveStatic())
 
-// Local paths for images and videos (served from /static/media/)
-const media = {
-  // Navy Suit
-  navyOriginal: '/static/media/navy-suit-1.jpg',
-  navyEnhanced: '/static/media/navy-suit-2.jpg',
-  navyVideo: '/static/media/navy-walk.mp4',
-  // Cream Suit  
-  creamOriginal: '/static/media/cream-suit-1.jpg',
-  creamEnhanced: '/static/media/cream-suit-2.jpg',
-  creamVideo: '/static/media/cream-walk.mp4'
-}
-
 // Main page - 5th Ave Fashion style
 app.get('/', (c) => {
   return c.html(`
@@ -54,7 +42,7 @@ app.get('/', (c) => {
             line-height: 1.6;
         }
 
-        /* ── Navigation ── */
+        /* Navigation */
         .nav {
             position: fixed;
             top: 0;
@@ -114,7 +102,7 @@ app.get('/', (c) => {
             font-weight: 600;
         }
 
-        /* ── Hero ── */
+        /* Hero */
         .hero {
             margin-top: 72px;
             padding: 100px 60px;
@@ -143,7 +131,7 @@ app.get('/', (c) => {
             line-height: 1.7;
         }
 
-        /* ── Shared Section Styles ── */
+        /* Shared Section Styles */
         .section {
             padding: 80px 60px;
         }
@@ -189,14 +177,33 @@ app.get('/', (c) => {
             color: rgba(255,255,255,0.6);
         }
 
-        /* ── Showcase: Product Rows ── */
-        .product-row {
-            max-width: 1400px;
-            margin: 0 auto 80px;
+        /* Showcase Intro */
+        .showcase-intro {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 72px;
         }
 
-        .product-row:last-child {
-            margin-bottom: 0;
+        .showcase-intro-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 30px;
+            font-weight: 500;
+            color: var(--ss-black);
+            margin-bottom: 14px;
+            line-height: 1.3;
+        }
+
+        .showcase-intro-sub {
+            font-size: 15px;
+            color: var(--ss-gray);
+            font-weight: 300;
+            line-height: 1.7;
+        }
+
+        /* Product Rows */
+        .product-row {
+            max-width: 1400px;
+            margin: 0 auto 0;
         }
 
         .product-row-title {
@@ -207,7 +214,14 @@ app.get('/', (c) => {
             color: var(--ss-black);
         }
 
-        /* 3-column × 2-row grid */
+        .product-row-divider {
+            border: none;
+            border-top: 1px solid rgba(0,0,0,0.07);
+            margin: 72px auto;
+            max-width: 1400px;
+        }
+
+        /* 3-column grid */
         .showcase-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -225,6 +239,16 @@ app.get('/', (c) => {
         .showcase-item:hover {
             transform: translateY(-4px);
             box-shadow: 0 18px 50px rgba(0,0,0,0.12);
+        }
+
+        /* Source image treatment */
+        .showcase-item.is-source .showcase-media {
+            background: #eeebe5;
+        }
+
+        .showcase-item.is-source .showcase-media img {
+            object-fit: contain;
+            padding: 20px;
         }
 
         .showcase-media {
@@ -259,6 +283,11 @@ app.get('/', (c) => {
             text-transform: uppercase;
             border-radius: 2px;
             z-index: 2;
+        }
+
+        .label-source {
+            background: var(--ss-black);
+            color: var(--ss-white);
         }
 
         .label-enhanced {
@@ -325,7 +354,7 @@ app.get('/', (c) => {
             color: var(--ss-black);
         }
 
-        /* ── How It Works ── */
+        /* How It Works */
         .steps-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -366,7 +395,7 @@ app.get('/', (c) => {
             font-weight: 300;
         }
 
-        /* ── Business Case ── */
+        /* Business Case */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -408,7 +437,7 @@ app.get('/', (c) => {
             font-weight: 300;
         }
 
-        /* ── CTA ── */
+        /* CTA */
         .cta-section {
             text-align: center;
             background: linear-gradient(135deg, var(--ss-navy) 0%, var(--ss-black) 100%);
@@ -453,7 +482,7 @@ app.get('/', (c) => {
             transform: translateY(-2px);
         }
 
-        /* ── Footer ── */
+        /* Footer */
         .footer {
             background: var(--ss-black);
             color: var(--ss-white);
@@ -477,7 +506,7 @@ app.get('/', (c) => {
             margin: 0 auto;
         }
 
-        /* ── Lightbox ── */
+        /* Lightbox */
         .lightbox {
             display: none;
             position: fixed;
@@ -519,7 +548,7 @@ app.get('/', (c) => {
             background: rgba(255,255,255,0.2);
         }
 
-        /* ── Responsive ── */
+        /* Responsive */
         @media (max-width: 1024px) {
             .showcase-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -562,14 +591,15 @@ app.get('/', (c) => {
             .hero {
                 padding: 70px 24px;
             }
+            .showcase-intro-title {
+                font-size: 24px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- ═══════════════════════════════════════════
-         SECTION 1 — NAVIGATION + HERO
-    ═══════════════════════════════════════════ -->
+    <!-- SECTION 1 — NAVIGATION + HERO -->
     <nav class="nav">
         <div class="nav-inner">
             <a href="/" class="logo">5th Ave Fashion</a>
@@ -587,27 +617,31 @@ app.get('/', (c) => {
     </section>
 
 
-    <!-- ═══════════════════════════════════════════
-         SECTION 2 — SHOWCASE
-    ═══════════════════════════════════════════ -->
+    <!-- SECTION 2 — SHOWCASE -->
     <section id="showcase" class="section">
 
-        <!-- ── Row 1: Navy Slim-Fit Suit (Male) ── -->
+        <!-- Showcase Section Intro -->
+        <div class="showcase-intro">
+            <h2 class="showcase-intro-title">From Simple Product Shot to Full Campaign Asset Set</h2>
+            <p class="showcase-intro-sub">A basic product image can become premium visuals for ecommerce, campaigns, and social content.</p>
+        </div>
+
+        <!-- Row 1: Navy Slim-Fit Suit -->
         <div class="product-row">
             <h3 class="product-row-title">Navy Slim-Fit Suit</h3>
             <div class="showcase-grid">
 
-                <!-- TOP ROW — 3 Images -->
+                <!-- Image Row: SOURCE > DETAIL > CAMPAIGN -->
 
-                <!-- Image 1: Product Page -->
-                <div class="showcase-item">
+                <!-- Image 1: Source -->
+                <div class="showcase-item is-source">
                     <div class="showcase-media">
-                        <img src="https://res.cloudinary.com/dtdajp5sw/image/upload/male1_chnmpt.png" alt="Product Page Image">
-                        <span class="comparison-label label-enhanced">Product Page</span>
+                        <img src="/static/navy-suit-flatlay.jpg" alt="Source Image — Navy Slim-Fit Suit">
+                        <span class="comparison-label label-source">Source Image</span>
                     </div>
                     <div class="showcase-info">
-                        <div class="showcase-type">Product Page Image</div>
-                        <div class="showcase-title">E-Commerce Ready</div>
+                        <div class="showcase-type">Client Provided</div>
+                        <div class="showcase-title">Flat-Lay Product Shot</div>
                     </div>
                 </div>
 
@@ -635,7 +669,7 @@ app.get('/', (c) => {
                     </div>
                 </div>
 
-                <!-- BOTTOM ROW — 3 Videos -->
+                <!-- Video Row: PRODUCT VIDEO > LOOKBOOK > SOCIAL -->
 
                 <!-- Video 1: Product Video -->
                 <div class="showcase-item">
@@ -691,22 +725,24 @@ app.get('/', (c) => {
             </div>
         </div>
 
-        <!-- ── Row 2: White Cocktail Dress (Female) ── -->
+        <hr class="product-row-divider">
+
+        <!-- Row 2: White Cocktail Dress -->
         <div class="product-row">
             <h3 class="product-row-title">White Cocktail Dress</h3>
             <div class="showcase-grid">
 
-                <!-- TOP ROW — 3 Images -->
+                <!-- Image Row: SOURCE > DETAIL > CAMPAIGN -->
 
-                <!-- Image 1: Product Page -->
-                <div class="showcase-item">
+                <!-- Image 1: Source -->
+                <div class="showcase-item is-source">
                     <div class="showcase-media">
-                        <img src="https://res.cloudinary.com/dtdajp5sw/image/upload/Female1_rdkwoc.png" alt="Product Page Image">
-                        <span class="comparison-label label-enhanced">Product Page</span>
+                        <img src="/static/white-dress-flatlay.jpg" alt="Source Image — White Cocktail Dress">
+                        <span class="comparison-label label-source">Source Image</span>
                     </div>
                     <div class="showcase-info">
-                        <div class="showcase-type">Product Page Image</div>
-                        <div class="showcase-title">E-Commerce Ready</div>
+                        <div class="showcase-type">Client Provided</div>
+                        <div class="showcase-title">Flat-Lay Product Shot</div>
                     </div>
                 </div>
 
@@ -734,7 +770,7 @@ app.get('/', (c) => {
                     </div>
                 </div>
 
-                <!-- BOTTOM ROW — 3 Videos -->
+                <!-- Video Row: PRODUCT VIDEO > LOOKBOOK > SOCIAL -->
 
                 <!-- Video 1: Product Video -->
                 <div class="showcase-item">
@@ -793,9 +829,7 @@ app.get('/', (c) => {
     </section>
 
 
-    <!-- ═══════════════════════════════════════════
-         SECTION 3 — HOW IT WORKS
-    ═══════════════════════════════════════════ -->
+    <!-- SECTION 3 — HOW IT WORKS -->
     <section id="features" class="section section-cream">
         <div class="section-header">
             <div class="section-tag">How It Works</div>
@@ -825,9 +859,7 @@ app.get('/', (c) => {
     </section>
 
 
-    <!-- ═══════════════════════════════════════════
-         SECTION 4 — THE BUSINESS CASE
-    ═══════════════════════════════════════════ -->
+    <!-- SECTION 4 — THE BUSINESS CASE -->
     <section class="section section-dark">
         <div class="section-header">
             <div class="section-tag">Why AI Content</div>
@@ -863,9 +895,7 @@ app.get('/', (c) => {
     </section>
 
 
-    <!-- ═══════════════════════════════════════════
-         SECTION 5 — CTA + FOOTER
-    ═══════════════════════════════════════════ -->
+    <!-- SECTION 5 — CTA + FOOTER -->
     <section id="contact" class="cta-section">
         <div class="section-tag">Get Started</div>
         <h2 class="cta-title">Ready to Upgrade Your Fashion Content?</h2>
@@ -882,9 +912,7 @@ app.get('/', (c) => {
     </footer>
 
 
-    <!-- ═══════════════════════════════════════════
-         LIGHTBOX
-    ═══════════════════════════════════════════ -->
+    <!-- LIGHTBOX -->
     <div class="lightbox" id="lightbox">
         <button class="lightbox-close" onclick="closeLightbox()">
             <i class="fas fa-times"></i>
@@ -946,24 +974,6 @@ app.get('/', (c) => {
 </body>
 </html>
   `)
-})
-
-// API endpoint
-app.get('/api/content', (c) => {
-  return c.json({
-    products: [
-      {
-        name: 'Charcoal Slim-Fit Suit',
-        enhanced: media.navyEnhanced,
-        video: media.navyVideo
-      },
-      {
-        name: 'Emerald Cocktail Dress',
-        enhanced: media.creamEnhanced,
-        video: media.creamVideo
-      }
-    ]
-  })
 })
 
 export default app
